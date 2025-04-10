@@ -9,6 +9,7 @@ func main() {
 	const IMTPower float64 = 2
 	var userHeight float64
 	var userKg float64
+	fmt.Print(`___ Калькулятор индекса массы тела ___`) // Мультистроки
 	fmt.Println("Введите свой рост в сантиметрах")
 	fmt.Scan(&userHeight)
 	fmt.Println("Введите свой вес в киллограммах")

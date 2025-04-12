@@ -8,18 +8,26 @@ import (
 const IMTPower float64 = 2
 
 func main() {
-	
 
 	fmt.Print(`
 ___ Калькулятор индекса массы тела ___
 --------------------------------------	
 `) // Мультистроки
-    usrHeight, usrKg := getUserInput()
+	usrHeight, usrKg := getUserInput()
 	IMT := calculateIMT(usrKg, usrHeight)
-	isLean := IMT < 16
-	if isLean {
-		fmt.Println("У вас недостаток веса!")
+
+	if IMT < 16 {
+		fmt.Println("У вас сильный дефицит массы тела!")
+	} else if IMT < 18.5 {
+		fmt.Println("У вас дефицит массы тела!")
+	} else if IMT < 25 {
+		fmt.Println("У вас нормальный вес!")
+	} else if IMT < 30 {
+		fmt.Println("У вас избыточный вес!")
+	} else {
+		fmt.Println("Ты жирдяй!")
 	}
+
 	outputResult(IMT)
 }
 

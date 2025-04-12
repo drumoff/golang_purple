@@ -16,6 +16,10 @@ ___ Калькулятор индекса массы тела ___
 `) // Мультистроки
     usrHeight, usrKg := getUserInput()
 	IMT := calculateIMT(usrKg, usrHeight)
+	isLean := IMT < 16
+	if isLean {
+		fmt.Println("У вас недостаток веса!")
+	}
 	outputResult(IMT)
 }
 

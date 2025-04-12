@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"math"
 )
@@ -11,13 +12,17 @@ func main() {
 	fmt.Print(`
 ___ Калькулятор индекса массы тела ___
 --------------------------------------	
-	`) // Мультистроки
+`) // Мультистроки
 	for {
 		usrHeight, usrKg := getUserInput()
-		IMT := calculateIMT(usrKg, usrHeight)
+		IMT, err := calculateIMT(usrKg, usrHeight)
+		if err != nil {
+			fmt.Printf("Не заданы параметры")
+			continue
+		}
 		outputResult(IMT)
 		isRepeateCalc := checkRepeatCalculation()
-		if isRepeateCalc {
+		if !isRepeateCalc {
 			break
 		}
 	}
@@ -40,9 +45,12 @@ func outputResult(imt float64) {
 	}
 }
 
-func calculateIMT(userKg, userHeight float64) float64 {
+func calculateIMT(userKg, userHeight float64) (float64, error) {
+	if userKg <= 0 || userHeight <= 0 {
+		return 0, errors.New("NO_PARAMS_ERROR")
+	}
 	IMT := userKg / math.Pow(userHeight/100, IMTPower)
-	return IMT
+	return IMT, nil
 }
 
 func getUserInput() (userHeight float64, userKg float64) {
@@ -57,5 +65,5 @@ func checkRepeatCalculation() bool {
 	var answer string
 	fmt.Println("\nХотите сделать расчет еще раз?(да/нет)\n*****************************")
 	fmt.Scan(&answer)
-	return answer == "нет"
+	return !(answer == "нет")
 }

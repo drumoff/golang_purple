@@ -17,8 +17,9 @@ ___ Калькулятор индекса массы тела ___
 		usrHeight, usrKg := getUserInput()
 		IMT, err := calculateIMT(usrKg, usrHeight)
 		if err != nil {
-			fmt.Printf("Не заданы параметры")
-			continue
+			// fmt.Printf("Не заданы параметры")
+			// continue
+			panic("Ошибка блаблабла")
 		}
 		outputResult(IMT)
 		isRepeateCalc := checkRepeatCalculation()
